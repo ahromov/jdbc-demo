@@ -1,6 +1,6 @@
 
 @SuppressWarnings("unchecked")
-public class MyArray<T> {
+public class MyArrayList<T> {
     private int arrSize = 8;
     private int counter = 0;    
     private T[] arr = (T[]) new Object[arrSize];
