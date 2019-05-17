@@ -1,3 +1,5 @@
+package ua.lviv.lgs;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -20,10 +22,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		create("Test1", "Test1");
-		create("Test2", "Test2");
+		create("Created", "Created");
 		readById(1001);
-		update(1000, "Updeted Test", "Updated test");
+		update(1000, "Updated", "Updated");
 		delete(1001);
 		readAll();
 	}
@@ -82,33 +83,6 @@ public class Main {
 		}
 	}
 
-	private static void readAll() {
-		Connection connection = null;
-		Statement statement = null;
-
-		try {
-			connection = DriverManager.getConnection(connectionUrl, dbLogin, dbPassword);
-			statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM user");
-
-			while (rs.next())
-				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
-
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				statement.close();
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
 	private static void update(int id, String firstName, String lastName) {
 		Connection connection = null;
 		Statement statement = null;
@@ -142,6 +116,33 @@ public class Main {
 			statement = connection.createStatement();
 
 			statement.executeUpdate("DELETE FROM user WHERE id = " + id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void readAll() {
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = DriverManager.getConnection(connectionUrl, dbLogin, dbPassword);
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM user");
+
+			while (rs.next())
+				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
