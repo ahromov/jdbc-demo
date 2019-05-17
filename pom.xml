@@ -5,6 +5,7 @@
 	<groupId>ua.lviv.lgs</groupId>
 	<artifactId>jdbc-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<dependencies>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -12,6 +13,7 @@
 			<version>8.0.13</version>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<testSourceDirectory>src/test</testSourceDirectory>
 		<plugins>
