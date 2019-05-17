@@ -22,8 +22,8 @@ public class Main {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		create("Test1", "Test1");
 		create("Test2", "Test2");
-		readAll();
-		update(1000, "Andrew", "Gromov");
+		readById(1001);
+		update(1000, "Updeted Test", "Updated test");
 		delete(1001);
 		readAll();
 	}
@@ -41,6 +41,33 @@ public class Main {
 
 			statement.executeUpdate();
 			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				statement.close();
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (NullPointerException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static void readById(int id) {
+		Connection connection = null;
+		Statement statement = null;
+
+		try {
+			connection = DriverManager.getConnection(connectionUrl, dbLogin, dbPassword);
+			statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT id, first_name, last_name FROM user");
+
+			while (rs.next())
+				System.out.println(rs.getInt(1) + " " + rs.getString(2) + " " + rs.getString(3));
+
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
