@@ -7,13 +7,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Main {
+public class JdbcDemoApplication {
 
 	private static String connectionUrl = "jdbc:mysql://localhost:3306/jdbc-demo?serverTimezone=UTC";
 	private static String dbLogin = "root";
 	private static String dbPassword = "toor";
 
-	public Main() {
+	public JdbcDemoApplication() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
